@@ -1,0 +1,57 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+// Paste this erd code in dbdiagram.io
+
+Table customer {
+  CustomerID text [pk]
+  Gender text
+  SeniorCitizen boolean
+  Partner boolean
+  Dependents boolean 
+}
+
+Table cust_loc {
+  CustID text [pk]
+  State text
+  Latitude real
+  Longitude real
+  ZipCode integer
+}
+
+Table cust_services {
+  Cust_ID text [pk]
+	PhoneService boolean
+	MultipleLines boolean
+	InternetService text
+	OnlineSecurity boolean
+	OnlineBackup boolean
+	DeviceProtection boolean
+	TechSupport boolean
+	StreamingTV boolean
+	StreamingMovies boolean
+}
+
+Table cust_account {
+  Account_id text [pk]
+	Tenure integer
+	Contract text
+	PaymentMethod text
+	PaperlessBilling boolean
+	MonthlyCharges real
+	TotalCharges real
+}
+
+Table cust_churn {
+  Id text [pk]
+	Churn boolean
+}
+
+
+Ref: "cust_services"."Cust_ID" - "customer"."CustomerID"
+
+Ref: "cust_account"."Account_id" - "customer"."CustomerID"
+
+Ref: "cust_loc"."CustID" - "customer"."CustomerID"
+
+Ref: "cust_churn"."Id" - "customer"."CustomerID"
